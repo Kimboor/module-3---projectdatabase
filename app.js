@@ -5,6 +5,15 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var db = require("./models");
 
+db.sequelize.sync({ force: false })
+  .then(() => {
+    console.log("Database synced");
+  })
+  .catch(err => {
+    console.error("Sync error:", err);
+  });
+
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 

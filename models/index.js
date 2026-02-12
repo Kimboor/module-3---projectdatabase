@@ -16,12 +16,11 @@ require('dotenv').config();
 
 // Database connection configuration using environment variables
 const connection = {
-  dialect: process.env.DIALECT,              // Database type (mysql)
-  dialectModule: process.env.DIALECTMODEL,   // Driver (mysql2)
-  database: process.env.DATABASE_NAME,       // Database name
-  username: process.env.ADMIN_USERNAME,      // Database username
-  password: process.env.ADMIN_PASSWORD,      // Database password
-  host: process.env.HOST                     // Database host
+  dialect: process.env.DIALECT,
+  database: process.env.DATABASE_NAME,
+  username: process.env.ADMIN_USERNAME,
+  password: process.env.ADMIN_PASSWORD,
+  host: process.env.HOST
 };
 
 // Create Sequelize instance (connect to database)
@@ -59,14 +58,17 @@ fs.readdirSync(__dirname)
     db[model.name] = model;
   });
 
+  // this checks for associations and creates them
+
+  Object.keys(db).forEach(modelName => {
+  if (db[modelName].associate) {
+    db[modelName].associate(db);
+  }
+});
+
 
 // Export db object so it can be used in app.js
 
 console.log(db)
 
 module.exports = db;
-
-
-
-
-// this is the brain

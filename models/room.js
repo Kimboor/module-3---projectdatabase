@@ -7,5 +7,10 @@ module.exports = (sequelize, Sequelize) => {
     },{
         timestamps: false
     });
+    // Associations
+    Room.associate = function(models) {
+        Room.belongsTo(models.Hotel)
+        Room.belongsToMany(models.User, {through: models.Reservation})
+    };
     return Room
 }
