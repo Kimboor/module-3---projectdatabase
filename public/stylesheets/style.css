@@ -1,8 +1,7 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+a, button {
+  max-width: 150px!important;
 }
 
-a {
-  color: #00B7FF;
+.right {
+  float:right;
 }
